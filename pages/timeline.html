@@ -14,16 +14,24 @@ ng-map {
 </style>
 <div class="well page">
 	<div class="row">
+	<div class="col-xs-12">
+		<h1>Acompanhe</h1>
+		<hr>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12">
 		<div map-lazy-load="https://maps.google.com/maps/api/js"
 		  map-lazy-load-params="{{googleMapsUrl}}">
 		  <ng-map default-style="false" center="-23.5977319,-46.6821862" zoom="12">
 		  </ng-map>
 		</div>
 	</div>
+	</div>
 	<br>
 	<div class="row">
 		<div class="col-xs-12">
-			<div class="panel {{ !n.solved ? 'panel-info' : 'panel-success' }}" ng-repeat="n in array track by $index">
+			<div class="panel" ng-class="!n.solved ? 'panel-info' : 'panel-success'" ng-repeat="n in array track by $index">
 			  <div class="panel-heading">
 			    <b><h3 class="panel-title">{{ n.type }}</h3><b>
 			  </div>
@@ -35,10 +43,13 @@ ng-map {
 				<button ng-click="incLikes(n)" type="button" class="btn btn-default btn-lg">
 				  {{ n.likes }} <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
 				</button>
-			    <h3>Comentários</h3>
+				<div ng-if="n.solved">
+				<a href="#" class="btn btn-raised btn-success">Ótimo<div class="ripple-container"></div></a> <a href="#" class="btn btn-raised btn-info">Bom<div class="ripple-container"></div></a> <a href="#" class="btn btn-raised btn-warning">Ruim<div class="ripple-container"></div></a>
+				</div>
+			    <h4>Comentários</h4>
 			    <hr>
-			    <div ng-repeat="c in n.comments">
-			    	<p><b>{{ c.author }}</b>: </p>
+			    <div ng-repeat="c in n.comments" class="well well-sm">
+			    	<p><b>{{ c.author }} comentou</b>: </p>
 					<p>{{ c.comment }}</p>
 
 					<button ng-click="incLikes(c)" type="button" class="btn btn-default btn-lg">

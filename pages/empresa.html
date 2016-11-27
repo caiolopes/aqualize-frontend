@@ -6,6 +6,22 @@ ng-map {
 </style>
 <div class="well page">
 	<div class="row">
+	<div class="col-xs-12">
+		<h1>Home: USIFER</h1>
+		<hr>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12">
+		<div map-lazy-load="https://maps.google.com/maps/api/js"
+		  map-lazy-load-params="{{googleMapsUrl}}">
+		  <ng-map default-style="false" center="-23.5977319,-46.6821862" zoom="12">
+		  </ng-map>
+		</div>
+		</div>
+	</div>
+	<br>
+	<div class="row">
  		<div class="col-xs-12">
  		<label for="address">Buscar hashtags:</label>
 		<tags-input on-tag-added="tag()" on-tag-removed="tag()" ng-model="tags" style="height:40px;"></tags-input>
@@ -13,16 +29,8 @@ ng-map {
 		</div>
     </div>
 	<div class="row">
-		<div map-lazy-load="https://maps.google.com/maps/api/js"
-		  map-lazy-load-params="{{googleMapsUrl}}">
-		  <ng-map default-style="false" center="-23.5977319,-46.6821862" zoom="12">
-		  </ng-map>
-		</div>
-	</div>
-	<br>
-	<div class="row">
 		<div class="col-xs-12">
-			<div class="panel {{ !n.solved ? 'panel-info' : 'panel-success' }}" ng-repeat="n in array track by $index">
+			<div class="panel" ng-class="!n.solved ? 'panel-info' : 'panel-success'" ng-repeat="n in array track by $index">
 			  <div class="panel-heading">
 			    <h3 class="panel-title">{{ n.type }}</h3>
 			  </div>
@@ -36,7 +44,7 @@ ng-map {
 						<input type="submit" class="btn btn-primary" value="{{ n.solved ? 'Não resolvido' : 'Resolvido' }}"/>
 					</fieldset>
 				</form>
-			    <h3>Comentários</h3>
+			    <h4>Comentários</h4>
 			    <hr>
 			    <div ng-repeat="c in n.comments">
 			    	{{ c.comment }}

@@ -53,7 +53,7 @@
 		  "comment": "",
           "id": 1,
           "type": "Vazamento",
-          "report": "Há dias percebi um fluxo de água anormal perto da minha casa, segui o caminho que a água percorreria e identifiquei alguns canos rompidos por onde sai muita água limpa.",
+          "report": "Há dias percebi um fluxo de água anormal perto na Rua Antonio Julio dos Santos - Jardim Leonor - São Paulo, segui o caminho que a água percorreria e identifiquei a tubulação toda rompida por onde sai muita água limpa. A foto mostra que o vazamento é muito grande e está desperdiçando água potável em todo o nosso bairro!! #DESCASO",
           "lat": -23.5631141,
           "lng": -46.65439200000003, 
 		  "author": "Caio Lopes",
@@ -61,14 +61,14 @@
           "img": "vazamento.jpg",
 		  "likes": 0,
       "liked": false,
-      "solved": false,
+      "solved": true,
           "help": "Entrei em contato com a SABESP e os mesmos ficaram responsáveis pelo reparo do cano, mas até agora nada. Como é uma água limpa, consegui captar um pouco com alguns baldes, o que vai me ajudar na lavagem do quintal e banheiros.",
 		  "comments": []
         }, {
           "id": 2,
 		  "comment": "",
           "type": "Poluição",
-           "report": "Meu vizinho joga restos de óleo de cozinhar no riacho que tem perto de casa. Já o avisei dos problemas que isto pode causar mas ele continua jogando.",
+           "report": "A empresa metalúrgica USIFER está despejando produtos químicos no Rio São Lourenço em Itaquera - São Paulo, causando a morte de peixes e muitos outros animais. Isto está ocorrendo a vários meses e ninguém toma nenhuma providência. Está um total descaso aqui com a natureza e com a população. PRECISAMOS DE UMA AÇÃO IMEDIATA!!!!!",
           "lat": -23.5523329,
           "lng": -46.658268899999996, 
 		  "author": "Caio Lopes",
@@ -306,7 +306,6 @@
     
     $scope.solve = function(post) {      
       post.solved = !post.solved;
-      console.log(post);
       for (var index in reportList.get()) {
         var report = reportList.get()[index];
         console.log(report);
