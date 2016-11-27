@@ -12,6 +12,10 @@
       <link rel="stylesheet" type="text/css" href="css/bootstrap-material-design.css">
       <link rel="stylesheet" type="text/css" href="css/ripples.min.css">
 
+      <link href="bower_components/bootstrap-social/bootstrap-social.css" rel="stylesheet">
+      <link href="bower_components/font-awesome/font-awesome.css" rel="stylesheet">
+
+
       <!-- SPELLS -->
       <!-- load angular via CDN -->
       <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.9/angular.min.js"></script>
@@ -23,6 +27,7 @@
       <script src="vendor/material.min.js"></script>
       <script src="vendor/ripples.min.js"></script>
       <script src="app.js"></script>
+
       <script>
       $(function() {
         $.material.init();
@@ -35,7 +40,7 @@
 
       <div class="container">
         <div class="header clearfix">
-          <nav>
+          <nav ng-hide="var">
             <ul class="nav nav-pills pull-right">
               <li role="presentation" class="active"><a href="#">Home</a></li>
               <li role="presentation"><a href="#">About</a></li>
