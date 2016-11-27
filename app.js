@@ -59,6 +59,7 @@
           "lng": -46.65439200000003, 
           "img": "vazamento.jpg",
 		  "likes": 0,
+      "liked": false,
           "help": "Entrei em contato com a SABESP e os mesmos ficaram responsáveis pelo reparo do cano, mas até agora nada. Como é uma água limpa, consegui captar um pouco com alguns baldes, o que vai me ajudar na lavagem do quintal e banheiros.",
 		  "comments": []
         }, {
@@ -71,11 +72,13 @@
           "img": "poluicao.jpg",
           "help": "Enviar coleta seletiva para materiais orgânicos que podem prejudicar o meio ambiente quando descartados incorretamente.",
           "likes": 5,
+          "liked": false,
           "comments": [
             {  
               "id": 1,
               "comment": "Boa!!",
               "author": "Caio Lopes",
+              "liked": false,
 			  "likes": 0
             }
           ]
@@ -98,6 +101,7 @@
 					comment.id = 0;
 				}
 				comment.author = "Caio Lopes",
+        comment.liked = false;
 				comment.comment = post.comment;
 				post.comments.push(comment);
 				post.comment = "";
@@ -117,6 +121,7 @@
         $scope.submit = function() {
           $scope.report.id = reportList.get().length;
           $scope.report.img = "vazamento.jpg";
+          $scope.report.liked = false;
           console.log($scope.report);
           reportList.add($scope.report);
           $location.path("timeline");
@@ -208,15 +213,64 @@
 		
 		$scope.incLikes = function(comment)
 		{
-			comment.likes = comment.likes+1;
+      if (!comment.liked)
+			 comment.likes = comment.likes+1;
+      else
+        comment.likes = comment.likes-1;
+      
+      comment.liked = !comment.liked;
 		};
 		
 		$scope.addComment = function(post)
 		{
 			reportList.addComment(post);
 		};
-    });
+  });
 
-    aqualize.controller('loginController', function($rootScope) {
-        $rootScope.showfootnav = false;
-    });
+    aqualize.controller('companyController', function($rootScope, $scope, $location, NgMap, markersArr, reportList) {
+        $rootScope.nav = "timeline";
+        $rootScope.showfootnav = true;
+        $scope.array = reportList.get();
+
+        NgMap.getMap().then(function(map) {
+          for (var i = 0; i < markersArr.get().length; i++) {
+            markersArr.get()[i].setMap(null);
+            markersArr.get().splice(i, 1);
+          }
+          for (index in $scope.array) {
+            var myinfowindow = new google.maps.InfoWindow({
+              content: "<img src='images/"+$scope.array[index].img+"' width='200' height='200'>"
+            });
+            var marker = new google.maps.Marker({
+                position: new google.maps.LatLng($scope.array[index].lat, $scope.array[index].lng),
+                draggable: false,
+                icon: 'https://s12.postimg.org/ouov6akgt/water_drop.png',
+                infowindow: myinfowindow
+            });
+            markersArr.add(marker);
+            marker.setMap(map);
+            google.maps.event.addListener(marker, 'click', function() {
+              this.infowindow.open(map, this);
+            });
+          }
+        });
+    
+    $scope.incLikes = function(comment)
+    {
+      if (!comment.liked)
+       comment.likes = comment.likes+1;
+      else
+        comment.likes = comment.likes-1;
+      
+      comment.liked = !comment.liked;
+    };
+    
+    $scope.addComment = function(post)
+    {
+      reportList.addComment(post);
+    };
+  });
+
+  aqualize.controller('loginController', function($rootScope) {
+      $rootScope.showfootnav = false;
+  });
