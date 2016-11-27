@@ -33,7 +33,7 @@ ng-map {
 		<div class="col-xs-12">
 			<div class="panel" ng-class="!n.solved ? 'panel-info' : 'panel-success'" ng-repeat="n in array track by $index">
 			  <div class="panel-heading">
-			    <b><h3 class="panel-title">{{ n.type }}</h3><b>
+			    <b><h3 class="panel-title">{{ n.type }} {{ n.solved ? '(Resolvido)' : '' }}</h3><b>
 			  </div>
 			  <div class="panel-body">
 			  	<p><b>Autor: </b> <i>{{ n.author }}</i> </p>
