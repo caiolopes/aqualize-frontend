@@ -13,6 +13,7 @@
       <link rel="stylesheet" type="text/css" href="css/ripples.min.css">
 
       <link href="css/bootstrap-social.css" rel="stylesheet">
+      <link href="css/ng-tags-input.min.css" rel="stylesheet">
 
 
       <!-- SPELLS -->
@@ -21,6 +22,7 @@
           <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.9/angular-route.js"></script>
       <script src="vendor/ng-map.min.js"></script>
       <script src="vendor/ng-file-upload.min.js"></script>
+      <script src="vendor/ng-tags-input.min.js"></script>
       <script src="vendor/ng-file-upload-shim.min.js"></script>
       <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
       <script src="vendor/material.min.js"></script>
@@ -41,8 +43,9 @@
         <div class="header clearfix" ng-show="showfootnav">
           <nav>
             <ul class="nav nav-pills pull-right">
-              <li role="presentation" class="{{nav == 'timeline' ? 'active' : ''}}"><a href="#/timeline">Timeline</a></li>
-              <li role="presentation" class="{{nav == 'report' ? 'active' : ''}}"><a href="#/relatar">Relatar</a></li>
+            <li role="presentation" ng-show="nav == 'empresa'" class="{{nav == 'empresa' ? 'active' : ''}}"><a href="#/empresa">Empresa</a></li>
+              <li role="presentation" ng-hide="nav == 'empresa'" class="{{nav == 'timeline' ? 'active' : ''}}"><a href="#/timeline">Timeline</a></li>
+              <li role="presentation" ng-hide="nav == 'empresa'" class="{{nav == 'report' ? 'active' : ''}}"><a href="#/relatar">Relatar</a></li>
 			  <div class="navbar-header pull-right">
 				<p class="navbar-text">
 					<a href="#/" class="navbar-link glyphicon glyphicon-off" title="log off"></a>

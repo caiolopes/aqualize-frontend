@@ -16,14 +16,14 @@ ng-map {
 	<div class="row">
 		<div map-lazy-load="https://maps.google.com/maps/api/js"
 		  map-lazy-load-params="{{googleMapsUrl}}">
-		  <ng-map default-style="false" center="-23.5523329,-46.658268899999996" zoom="13">
+		  <ng-map default-style="false" center="-23.5977319,-46.6821862" zoom="12">
 		  </ng-map>
 		</div>
 	</div>
 	<br>
 	<div class="row">
 		<div class="col-xs-12">
-			<div class="panel panel-info" ng-repeat="n in array track by $index">
+			<div class="panel {{ !n.solved ? 'panel-info' : 'panel-success' }}" ng-repeat="n in array track by $index">
 			  <div class="panel-heading">
 			    <b><h3 class="panel-title">{{ n.type }}</h3><b>
 			  </div>

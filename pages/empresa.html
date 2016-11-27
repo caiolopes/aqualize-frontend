@@ -6,16 +6,23 @@ ng-map {
 </style>
 <div class="well page">
 	<div class="row">
+ 		<div class="col-xs-12">
+ 		<label for="address">Buscar hashtags:</label>
+		<tags-input on-tag-added="tag()" on-tag-removed="tag()" ng-model="tags" style="height:40px;"></tags-input>
+		<br>
+		</div>
+    </div>
+	<div class="row">
 		<div map-lazy-load="https://maps.google.com/maps/api/js"
 		  map-lazy-load-params="{{googleMapsUrl}}">
-		  <ng-map default-style="false" center="-23.5523329,-46.658268899999996" zoom="13">
+		  <ng-map default-style="false" center="-23.5977319,-46.6821862" zoom="12">
 		  </ng-map>
 		</div>
 	</div>
 	<br>
 	<div class="row">
 		<div class="col-xs-12">
-			<div class="panel panel-info" ng-repeat="n in array track by $index">
+			<div class="panel {{ !n.solved ? 'panel-info' : 'panel-success' }}" ng-repeat="n in array track by $index">
 			  <div class="panel-heading">
 			    <h3 class="panel-title">{{ n.type }}</h3>
 			  </div>
@@ -24,9 +31,9 @@ ng-map {
 			    {{ n.report }}
 
 				<h4>{{ n.likes }} Curtidas</h4>
-				<form ng-submit="incLikes(n)">
+				<form ng-submit="solve(n)">
 					<fieldset class="form-group">
-						<input type="submit" class="btn btn-primary" value="{{ n.liked ? 'Descurtir' : 'Curtir' }}"/>
+						<input type="submit" class="btn btn-primary" value="{{ n.solved ? 'Não resolvido' : 'Resolvido' }}"/>
 					</fieldset>
 				</form>
 			    <h3>Comentários</h3>
@@ -34,11 +41,6 @@ ng-map {
 			    <div ng-repeat="c in n.comments">
 			    	{{ c.comment }}
 					<h5>{{ c.likes }} Curtidas</h5>
-					<form ng-submit="incLikes(c)">
-						<fieldset class="form-group">
-							<input type="submit" class="btn btn-primary" value="{{ c.liked ? 'Descurtir' : 'Curtir'}} "/>
-						</fieldset>
-					</form>
 			    </div>
 				<form ng-submit="addComment(n)" name="commentForm">
 					<fieldset class="form-group">

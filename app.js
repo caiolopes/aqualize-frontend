@@ -1,5 +1,5 @@
 // script.js
-    var aqualize = angular.module('aqualize', ['ngRoute', 'ngMap', 'ngFileUpload']);
+    var aqualize = angular.module('aqualize', ['ngRoute', 'ngMap', 'ngFileUpload', 'ngTagsInput']);
 
     // configure our routes
     aqualize.config(function($routeProvider) {
@@ -16,11 +16,10 @@
                 templateUrl : 'pages/timeline.html',
                 controller  : 'timelineController'
             })
-            .when('/contact', {
-                templateUrl : 'pages/contact.html',
-                controller  : 'contactController'
-            });
-
+            .when('/empresa', {
+                templateUrl : 'pages/empresa.html',
+                controller  : 'companyController'
+            })
     });
 
     aqualize.service('markersArr', function() {
@@ -62,6 +61,7 @@
           "img": "vazamento.jpg",
 		  "likes": 0,
       "liked": false,
+      "solved": false,
           "help": "Entrei em contato com a SABESP e os mesmos ficaram responsáveis pelo reparo do cano, mas até agora nada. Como é uma água limpa, consegui captar um pouco com alguns baldes, o que vai me ajudar na lavagem do quintal e banheiros.",
 		  "comments": []
         }, {
@@ -77,6 +77,7 @@
           "help": "Enviar coleta seletiva para materiais orgânicos que podem prejudicar o meio ambiente quando descartados incorretamente.",
           "likes": 5,
           "liked": false,
+          "solved": false,
           "comments": [
             {  
               "id": 1,
@@ -126,10 +127,11 @@
           $scope.report.id = reportList.get().length;
           $scope.report.img = "vazamento.jpg";
           $scope.report.liked = false;
-		  $scope.report.likes = 0;
-		  $scope.report.comments = [];
-		  $scope.report.comment = "";
-		  $scope.report.author = "Caio Lopes";
+          $scope.report.solved = false;
+    		  $scope.report.likes = 0;
+    		  $scope.report.comments = [];
+    		  $scope.report.comment = "";
+    		  $scope.report.author = "Caio Lopes";
           console.log($scope.report);
           reportList.add($scope.report);
           $location.path("timeline");
@@ -216,11 +218,32 @@
             google.maps.event.addListener(marker, 'click', function() {
               this.infowindow.open(map, this);
             });
+            // Try HTML5 geolocation.
+            if (navigator.geolocation) {
+              navigator.geolocation.getCurrentPosition(function(position) {
+                var pos = {
+                  lat: position.coords.latitude,
+                  lng: position.coords.longitude
+                };
+                var currentMarker = new google.maps.Marker({
+                    position: new google.maps.LatLng(pos.lat, pos.lng),
+                    draggable: false,
+                    icon: 'http://www.greaterdandenong.com/Public/images/Maps/CurrentLocation.png'
+                });
+                markersArr.add(currentMarker);
+                currentMarker.setMap(map);
+                map.setCenter(pos);
+              }, function() {
+                handleLocationError(true, infoWindow, map.getCenter());
+              });
+            } else {
+              // Browser doesn't support Geolocation
+              handleLocationError(false, infoWindow, map.getCenter());
+            }
           }
         });
 		
-		$scope.incLikes = function(comment)
-		{
+		$scope.incLikes = function(comment) {
       if (!comment.liked)
 			 comment.likes = comment.likes+1;
       else
@@ -229,16 +252,34 @@
       comment.liked = !comment.liked;
 		};
 		
-		$scope.addComment = function(post)
-		{
+		$scope.addComment = function(post) {
 			reportList.addComment(post);
 		};
   });
 
     aqualize.controller('companyController', function($rootScope, $scope, $location, NgMap, markersArr, reportList) {
-        $rootScope.nav = "timeline";
+        $rootScope.nav = "empresa";
         $rootScope.showfootnav = true;
-        $scope.array = reportList.get();
+        $scope.tags = [];
+        $scope.array = angular.copy(reportList.get());
+        $scope.tag = function() {
+          $scope.array = angular.copy(reportList.get());
+          var i = $scope.array.length;
+          if ($scope.tags.length > 0) {
+            while (i--) {
+              var report = reportList.get()[i];
+              var found = false;
+              for (var j = 0; j < $scope.tags.length; j++) {
+                if(report.report.indexOf($scope.tags[j].text) !== -1) {
+                  found = true;
+                }
+              }
+              if (!found) {
+                $scope.array.splice(i, 1);
+              } 
+            }
+          }
+        };
 
         NgMap.getMap().then(function(map) {
           for (var i = 0; i < markersArr.get().length; i++) {
@@ -263,18 +304,19 @@
           }
         });
     
-    $scope.incLikes = function(comment)
-    {
-      if (!comment.liked)
-       comment.likes = comment.likes+1;
-      else
-        comment.likes = comment.likes-1;
-      
-      comment.liked = !comment.liked;
+    $scope.solve = function(post) {      
+      post.solved = !post.solved;
+      console.log(post);
+      for (var index in reportList.get()) {
+        var report = reportList.get()[index];
+        console.log(report);
+        if (report.id == post.id) {
+          report.solved = true;
+        }
+      }
     };
     
-    $scope.addComment = function(post)
-    {
+    $scope.addComment = function(post) {
       reportList.addComment(post);
     };
   });
