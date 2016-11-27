@@ -57,6 +57,8 @@
           "report": "Há dias percebi um fluxo de água anormal perto da minha casa, segui o caminho que a água percorreria e identifiquei alguns canos rompidos por onde sai muita água limpa.",
           "lat": -23.5631141,
           "lng": -46.65439200000003, 
+		  "author": "Caio Lopes",
+		  "sugestao": "Arruma",
           "img": "vazamento.jpg",
 		  "likes": 0,
       "liked": false,
@@ -69,6 +71,8 @@
            "report": "Meu vizinho joga restos de óleo de cozinhar no riacho que tem perto de casa. Já o avisei dos problemas que isto pode causar mas ele continua jogando.",
           "lat": -23.5523329,
           "lng": -46.658268899999996, 
+		  "author": "Caio Lopes",
+		  "sugestao": "Arruma",
           "img": "poluicao.jpg",
           "help": "Enviar coleta seletiva para materiais orgânicos que podem prejudicar o meio ambiente quando descartados incorretamente.",
           "likes": 5,
@@ -122,6 +126,10 @@
           $scope.report.id = reportList.get().length;
           $scope.report.img = "vazamento.jpg";
           $scope.report.liked = false;
+		  $scope.report.likes = 0;
+		  $scope.report.comments = [];
+		  $scope.report.comment = "";
+		  $scope.report.author = "Caio Lopes";
           console.log($scope.report);
           reportList.add($scope.report);
           $location.path("timeline");
