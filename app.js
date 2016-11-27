@@ -62,6 +62,10 @@
 		  "likes": 0,
       "liked": false,
       "solved": true,
+		"solved_great": 0,
+		"solved_good": 0,
+		"solved_bad": 0,
+		"solved_total": 0,
           "help": "Entrei em contato com a SABESP e os mesmos ficaram responsáveis pelo reparo do cano, mas até agora nada. Como é uma água limpa, consegui captar um pouco com alguns baldes, o que vai me ajudar na lavagem do quintal e banheiros.",
 		  "comments": []
         }, {
@@ -78,6 +82,10 @@
           "likes": 5,
           "liked": false,
           "solved": false,
+		  "solved_great": 0,
+		  "solved_good": 0,
+		  "solved_bad": 0,
+		  "solved_total": 0,
           "comments": [
             {  
               "id": 1,
@@ -128,6 +136,10 @@
           $scope.report.img = "vazamento.jpg";
           $scope.report.liked = false;
           $scope.report.solved = false;
+		  $scope.solved_great = 0,
+		  $scope.solved_good = 0,
+		  $scope.solved_bad = 0,
+		  $scope.solved_total = 0,
     		  $scope.report.likes = 0;
     		  $scope.report.comments = [];
     		  $scope.report.comment = "";
@@ -255,6 +267,19 @@
 		$scope.addComment = function(post) {
 			reportList.addComment(post);
 		};
+		
+		$scope.add_great = function(post){
+			post.solved_great = post.solved_great+1;
+			post.solved_total = post.solved_total+1;
+		}
+		$scope.add_good = function(post){
+			post.solved_good = post.solved_good+1;
+			post.solved_total = post.solved_total+1;
+		}
+		$scope.add_bad = function(post){
+			post.solved_bad = post.solved_bad+1;
+			post.solved_total = post.solved_total+1;
+		}
   });
 
     aqualize.controller('companyController', function($rootScope, $scope, $location, NgMap, markersArr, reportList) {
