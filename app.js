@@ -51,15 +51,19 @@
 
     aqualize.service('reportList', function() {
       var reports = [{
+		  "comment": "",
           "id": 1,
           "type": "Vazamento",
           "description": "Há dias percebi um fluxo de água anormal perto da minha casa, segui o caminho que a água percorreria e identifiquei alguns canos rompidos por onde sai muita água limpa.",
           "lat": -23.5631141,
           "lng": -46.65439200000003, 
           "img": "vazamento.jpg",
-          "help": "Entrei em contato com a SABESP e os mesmos ficaram responsáveis pelo reparo do cano, mas até agora nada. Como é uma água limpa, consegui captar um pouco com alguns baldes, o que vai me ajudar na lavagem do quintal e banheiros."
+		  "likes": 0,
+          "help": "Entrei em contato com a SABESP e os mesmos ficaram responsáveis pelo reparo do cano, mas até agora nada. Como é uma água limpa, consegui captar um pouco com alguns baldes, o que vai me ajudar na lavagem do quintal e banheiros.",
+		  "comments": []
         }, {
           "id": 2,
+		  "comment": "",
           "type": "Poluição",
            "description": "Meu vizinho joga restos de óleo de cozinhar no riacho que tem perto de casa. Já o avisei dos problemas que isto pode causar mas ele continua jogando.",
           "lat": -23.5523329,
@@ -71,7 +75,8 @@
             {  
               "id": 1,
               "comment": "Boa!!",
-              "author": "Caio Lopes"
+              "author": "Caio Lopes",
+			  "likes": 0
             }
           ]
         }];
@@ -82,7 +87,21 @@
             },
             add: function(report) {
                 reports.push(report);
-            }
+            },
+			addComment: function(post) {
+				var comment = {}
+				comment.likes = 0;
+				if(post.comments.length > 0){
+					comment.id = post.comments[post.comments.length -1].id+1;
+				}
+				else{
+					comment.id = 0;
+				}
+				comment.author = "Caio Lopes",
+				comment.comment = post.comment;
+				post.comments.push(comment);
+				post.comment = "";
+			}
         };
     });
 
@@ -177,6 +196,16 @@
             });
           }
         });
+		
+		$scope.incLikes = function(comment)
+		{
+			comment.likes = comment.likes+1;
+		};
+		
+		$scope.addComment = function(post)
+		{
+			reportList.addComment(post);
+		};
     });
 
     aqualize.controller('loginController', function($rootScope) {

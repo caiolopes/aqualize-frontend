@@ -22,11 +22,31 @@ ng-map {
 			  <div class="panel-body">
 			  	<p align="center"><img src="images/{{ n.img }}" class="img-responsive" style="height:300px;"></p>
 			    {{ n.description }}
+				<h4>{{ n.likes }} Likes</h4>
+				<form ng-submit="incLikes(n)">
+					<fieldset class="form-group">
+						<input type="submit" class="btn btn-primary" value="Like post"/>
+					</fieldset>
+				</form>
 			    <h3>Comentários</h3>
 			    <hr>
-			    <div ng-repeat="c in array[$index].comments track by c.id">
+			    <div ng-repeat="c in n.comments">
 			    	{{ c.comment }}
+					<h5>{{ c.likes }} Likes</h5>
+					<form ng-submit="incLikes(c)">
+						<fieldset class="form-group">
+							<input type="submit" class="btn btn-primary" value="Like comment"/>
+						</fieldset>
+					</form>
 			    </div>
+				<form ng-submit="addComment(n)" name="commentForm">
+					<fieldset class="form-group">
+						<textarea ng-model="n.comment" class="form-control" placeholder="Escreva seu comentário" title="Comentário"></textarea>
+					</fieldset>
+					<fieldset class="form-group">
+						<input type="submit" class="btn btn-primary pull-right" value="Enviar Comentário" />
+					</fieldset>
+				</form>
 			  </div>
 			</div>
 		</div>
