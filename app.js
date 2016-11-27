@@ -212,7 +212,7 @@ $(document).ready(function() {
 
     // create the controller and inject Angular's $scope
     aqualize.controller('mainController', function($scope, NgMap, Upload) {
-        var myMap, marker, lat = -23.5977319, lng = -46.6821862;
+        var myMap, marker = false, lat = -23.5977319, lng = -46.6821862;
         // create a message to display in our view
         $scope.message = 'Everyone come and see how good I look!';
         $scope.googleMapsUrl="https://maps.googleapis.com/maps/api/js?key=AIzaSyCEdyZcl5KZB3RkXr6JeI8mg1HjG5ZduEU";
@@ -236,21 +236,23 @@ $(document).ready(function() {
       var geocoder;
       NgMap.getMap().then(function(map) {
         myMap = map;
-        marker = new google.maps.Marker({
-            position: new google.maps.LatLng(lat, lng),
-            draggable: true
-        });
-        map.setCenter(marker.position);
-        marker.setMap(myMap);
-        google.maps.event.addListener(marker, 'dragend', function(evt) {
+        if (!marker) { 
+            marker = new google.maps.Marker({
+                position: new google.maps.LatLng(lat, lng),
+                draggable: true
+            });
+            map.setCenter(marker.position);
+            marker.setMap(myMap);
+            google.maps.event.addListener(marker, 'dragend', function(evt) {
 
-        });
-        google.maps.event.addListener(marker, 'dragstart', function(evt) {
-          
-        });
-        geocoder = new google.maps.Geocoder;
+            });
+            google.maps.event.addListener(marker, 'dragstart', function(evt) {
+              
+            });
+            geocoder = new google.maps.Geocoder;
+        }
       });
-      
+
         // upload on file select or drop
         $scope.upload = function (file) {
             Upload.upload({
