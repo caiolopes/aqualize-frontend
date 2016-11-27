@@ -54,7 +54,7 @@
 		  "comment": "",
           "id": 1,
           "type": "Vazamento",
-          "description": "Há dias percebi um fluxo de água anormal perto da minha casa, segui o caminho que a água percorreria e identifiquei alguns canos rompidos por onde sai muita água limpa.",
+          "report": "Há dias percebi um fluxo de água anormal perto da minha casa, segui o caminho que a água percorreria e identifiquei alguns canos rompidos por onde sai muita água limpa.",
           "lat": -23.5631141,
           "lng": -46.65439200000003, 
           "img": "vazamento.jpg",
@@ -65,7 +65,7 @@
           "id": 2,
 		  "comment": "",
           "type": "Poluição",
-           "description": "Meu vizinho joga restos de óleo de cozinhar no riacho que tem perto de casa. Já o avisei dos problemas que isto pode causar mas ele continua jogando.",
+           "report": "Meu vizinho joga restos de óleo de cozinhar no riacho que tem perto de casa. Já o avisei dos problemas que isto pode causar mas ele continua jogando.",
           "lat": -23.5523329,
           "lng": -46.658268899999996, 
           "img": "poluicao.jpg",
@@ -106,25 +106,36 @@
     });
 
     // create the controller and inject Angular's $scope
-    aqualize.controller('reportController', function($rootScope, $scope, NgMap, Upload, $location, markersArr) {
+    aqualize.controller('reportController', function($rootScope, $scope, NgMap, Upload, $location, markersArr, reportList) {
         var myMap, marker, lat = -23.5977319, lng = -46.6821862;
         $rootScope.nav = "report";
+        $scope.report = {};
         $rootScope.showfootnav = true;
         // create a message to display in our view
         $scope.message = 'Everyone come and see how good I look!';
         $scope.googleMapsUrl="https://maps.googleapis.com/maps/api/js?key=AIzaSyCEdyZcl5KZB3RkXr6JeI8mg1HjG5ZduEU";
+        $scope.submit = function() {
+          $scope.report.id = reportList.get().length;
+          $scope.report.img = "vazamento.jpg";
+          console.log($scope.report);
+          reportList.add($scope.report);
+          $location.path("timeline");
+        };
+
         $scope.search = function() {
             console.log($scope.address);
             geocoder.geocode({
-                'address': $scope.address
+                'address': $scope.report.address
               }, function(results, status) {
                 if (status === google.maps.GeocoderStatus.OK) {
                   myMap.setCenter(results[0].geometry.location);
+                  console.log(results[0].geometry.location)
                   myMap.setZoom(16);
                   marker.setPosition(results[0].geometry.location);
                   myMap.setCenter(marker.position);
-                  //latitude.val(marker.getPosition().lat());
-                  //longitude.val(marker.getPosition().lng());
+                  $scope.report.lat = results[0].geometry.location.lat();
+                  $scope.report.lng = results[0].geometry.location.lng();
+                  console.log($scope.report);
                 } else {
                   alert('Geocode was not successful for the following reason: ' + status);
                 }
@@ -145,10 +156,8 @@
         map.setCenter(marker.position);
         marker.setMap(myMap);
         google.maps.event.addListener(marker, 'dragend', function(evt) {
-
-        });
-        google.maps.event.addListener(marker, 'dragstart', function(evt) {
-          
+          $scope.report.lat = evt.latLng.lat();
+          $scope.report.lng = evt.latLng.lng();
         });
         geocoder = new google.maps.Geocoder;
       });

@@ -21,7 +21,8 @@ ng-map {
 			  </div>
 			  <div class="panel-body">
 			  	<p align="center"><img src="images/{{ n.img }}" class="img-responsive" style="height:300px;"></p>
-			    {{ n.description }}
+			    {{ n.report }}
+
 				<h4>{{ n.likes }} Likes</h4>
 				<form ng-submit="incLikes(n)">
 					<fieldset class="form-group">
