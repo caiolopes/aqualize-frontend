@@ -44,7 +44,16 @@ ng-map {
 				  {{ n.likes }} <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
 				</button>
 				<div ng-if="n.solved">
-				<a href="#" class="btn btn-raised btn-success">Ótimo<div class="ripple-container"></div></a> <a href="#" class="btn btn-raised btn-info">Bom<div class="ripple-container"></div></a> <a href="#" class="btn btn-raised btn-warning">Ruim<div class="ripple-container"></div></a>
+				<a ng-click="add_great(n)" class="btn btn-raised btn-success">Ótimo<div class="ripple-container"></div></a> <a ng-click="add_good(n)" class="btn btn-raised btn-info">Bom<div class="ripple-container"></div></a> <a ng-click="add_bad(n)" class="btn btn-raised btn-warning">Ruim<div class="ripple-container"></div></a>
+					<div ng-if="n.solved_total > 0" class="bs-component">
+						<div class="progress">
+						
+							<div class="progress-bar progress-bar-success" style="width: {{ n.solved_great * 100/n.solved_total }}%"></div>
+							<div class="progress-bar progress-bar-info" style="width: {{ n.solved_good * 100/n.solved_total }}%"></div>
+							<div class="progress-bar progress-bar-warning" style="width: {{ n.solved_bad * 100/n.solved_total }}%"></div>
+						  
+						</div>
+					</div>
 				</div>
 			    <h4>Comentários</h4>
 			    <hr>
