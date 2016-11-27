@@ -4,28 +4,63 @@
 		<input type="hidden" name="longitude" id="longitude">
 
 	    <div class="col-xs-12 col-md-10 col-md-offset-1">
+		    <div class="col-xs-12">
 		    <div class="form-group label-static is-empty inline">
-		        <label for="type">Tipo:</label>
-		        <input ng-model="type" id="type" class="form-control" type="text" name="type">
+				<div class="form-group">
+                <label for="s1">Tipo</label>
+                <select id="s1" class="form-control">
+                  <option value="" class="selected">Selecione:</option>
+                  <option value="poluicao">Poluição</option>
+                  <option value="vazamento">Vazamento</option>
+                  <option value="mau_uso">Mau uso (disperdício)</option>
+                  <option value="limpeza">Limpeza</option>
+                  <option value="desemoronamento">Desmoronamento</option>
+                  <option value="Madeleine">Acesso (falta d'água)</option>
+                  <option value="disponibilidade">Disponibilidade</option>
+                  <option value="enchente">Enchente</option>
+                  <option value="descarte">Descarte de resíduos</option>
+                </select>
+                </div>
+              </div>
 		    </div>
 
-		    <div class="form-group label-static is-empty inline">
-		        <label for="address">Endereço:</label>
-		        <input ng-model="address" id="address" class="form-control" type="text" name="address">
-		        <button id="search" ng-click="search()" class="btn btn-raised btn-primary"">Buscar</button>
+		    <div class="col-xs-6">
+			    <div class="form-group label-static is-empty inline">
+			        <label for="address">Endereço:</label>
+			        <input ng-model="address" id="address" class="form-control" type="text" name="address">
+			        <button id="search" ng-click="search()" class="btn btn-raised btn-primary"><i class="fa fa-search" aria-hidden="true"></i>&nbsp;&nbsp;Buscar</button>
+			    </div>
 		    </div>
 
-			<div class="col-xs-12">
+			<div class="col-xs-6">
 				<div map-lazy-load="https://maps.google.com/maps/api/js"
 				  map-lazy-load-params="{{googleMapsUrl}}">
 				  <ng-map default-style="false" center="-23.5977319,-46.6821862" zoom="12">
-				  	<marker 
-				  	position="[-23.5977319,-46.6821862]" 
-				  	title="how" 
-				  	draggable="true"></marker>
 				  </ng-map>
 				</div>
 			</div>
+			<div class="col-xs-12">
+				<div class="form-group">
+					<label for="repot">Relato:</label>
+					<textarea id="report" class="form-control"></textarea>
+        		</div>
+            </div>
+			<div class="col-xs-12">
+				<div class="form-group is-empty is-fileinput">
+				<div class="btn btn-raised btn-primary" ngf-select ng-model="file" name="file" ngf-pattern="'image/*'"
+   				ngf-accept="'image/*'" ngf-resize="{width: 400, height: 400}"><i class="fa fa-file-image-o" aria-hidden="true"></i>&nbsp;&nbsp;Imagem</div>
+        		</div>
+        		<img ngf-thumbnail="file">
+            </div>
+		    <div class="col-xs-offset-5">
+		    	<button id="search" ng-click="search()" class="btn btn-raised btn-primary">Enviar</button>
+		    </div>
 		</div>
 	</div>
 </div>
+
+<script>
+$(function() {
+$(".select").dropdown({"optionClass": "withripple"});
+});
+</script>
