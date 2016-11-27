@@ -191,10 +191,12 @@ $(document).ready(function() {
 
             // route for the home page
             .when('/', {
-                templateUrl : 'pages/login.html',
+                templateUrl : 'pages/login.html'
+            })
+            .when('/home', {
+                templateUrl : 'pages/home.html',
                 controller  : 'mainController'
             })
-
             // route for the about page
             .when('/about', {
                 templateUrl : 'pages/about.html',
