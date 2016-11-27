@@ -8,7 +8,7 @@ ng-map {
 	<div class="row">
 		<div map-lazy-load="https://maps.google.com/maps/api/js"
 		  map-lazy-load-params="{{googleMapsUrl}}">
-		  <ng-map default-style="false" center="-22.814023987885484,-43.27381610870361" zoom="15">
+		  <ng-map default-style="false" center="-23.5523329,-46.658268899999996" zoom="13">
 		  </ng-map>
 		</div>
 	</div>
@@ -22,6 +22,11 @@ ng-map {
 			  <div class="panel-body">
 			  	<p align="center"><img src="images/{{ n.img }}" class="img-responsive" style="height:300px;"></p>
 			    {{ n.description }}
+			    <h3>Comentários</h3>
+			    <hr>
+			    <div ng-repeat="c in array[$index].comments track by c.id">
+			    	{{ c.comment }}
+			    </div>
 			  </div>
 			</div>
 		</div>

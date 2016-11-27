@@ -36,7 +36,6 @@
         };
     });
 
-
     aqualize.service('infowindowArr', function() {
       var info = [];
 
@@ -46,6 +45,43 @@
             },
             add: function(marker) {
                 info.push(marker);
+            }
+        };
+    });
+
+    aqualize.service('reportList', function() {
+      var reports = [{
+          "id": 1,
+          "type": "Vazamento",
+          "description": "Há dias percebi um fluxo de água anormal perto da minha casa, segui o caminho que a água percorreria e identifiquei alguns canos rompidos por onde sai muita água limpa.",
+          "lat": -23.5631141,
+          "lng": -46.65439200000003, 
+          "img": "vazamento.jpg",
+          "help": "Entrei em contato com a SABESP e os mesmos ficaram responsáveis pelo reparo do cano, mas até agora nada. Como é uma água limpa, consegui captar um pouco com alguns baldes, o que vai me ajudar na lavagem do quintal e banheiros."
+        }, {
+          "id": 2,
+          "type": "Poluição",
+           "description": "Meu vizinho joga restos de óleo de cozinhar no riacho que tem perto de casa. Já o avisei dos problemas que isto pode causar mas ele continua jogando.",
+          "lat": -23.5523329,
+          "lng": -46.658268899999996, 
+          "img": "poluicao.jpg",
+          "help": "Enviar coleta seletiva para materiais orgânicos que podem prejudicar o meio ambiente quando descartados incorretamente.",
+          "likes": 5,
+          "comments": [
+            {  
+              "id": 1,
+              "comment": "Boa!!",
+              "author": "Caio Lopes"
+            }
+          ]
+        }];
+
+        return {
+            get: function () {
+                return reports;
+            },
+            add: function(report) {
+                reports.push(report);
             }
         };
     });
@@ -114,26 +150,10 @@
         };
     });
 
-    aqualize.controller('timelineController', function($rootScope, $scope, $location, NgMap, markersArr) {
+    aqualize.controller('timelineController', function($rootScope, $scope, $location, NgMap, markersArr, reportList) {
         $rootScope.nav = "timeline";
         $rootScope.showfootnav = true;
-        $scope.array = [{
-          "id": 1,
-          "type": "Vazamento",
-          "description": "Há dias percebi um fluxo de água anormal perto da minha casa, segui o caminho que a água percorreria e identifiquei alguns canos rompidos por onde sai muita água limpa.",
-          "lat": -22.814023987885484,
-          "lng": -43.27381610870361, 
-          "img": "vazamento.jpg",
-          "help": "Entrei em contato com a SABESP e os mesmos ficaram responsáveis pelo reparo do cano, mas até agora nada. Como é uma água limpa, consegui captar um pouco com alguns baldes, o que vai me ajudar na lavagem do quintal e banheiros."
-        }, {
-          "id": 2,
-          "type": "Poluição",
-           "description": "Meu vizinho joga restos de óleo de cozinhar no riacho que tem perto de casa. Já o avisei dos problemas que isto pode causar mas ele continua jogando.",
-          "lat": -23.4888228,
-          "lng": -46.52699960000001, 
-          "img": "poluicao.jpg",
-          "help": "Enviar coleta seletiva para materiais orgânicos que podem prejudicar o meio ambiente quando descartados incorretamente."
-        }];
+        $scope.array = reportList.get();
 
         NgMap.getMap().then(function(map) {
           for (var i = 0; i < markersArr.get().length; i++) {
