@@ -1,28 +1,54 @@
   <html ng-app="aqualize">
     <head>
       <!-- SCROLLS -->
-      <!-- load bootstrap and fontawesome via CDN -->
-      <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" />
+      <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+      <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/icon?family=Material+Icons">
+      <!-- Bootstrap -->
+      <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
       <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css" />
+      <link rel="stylesheet" href="css/app.css" />
+
+      <!-- Bootstrap Material Design -->
+      <link rel="stylesheet" type="text/css" href="css/bootstrap-material-design.css">
+      <link rel="stylesheet" type="text/css" href="css/ripples.min.css">
 
       <!-- SPELLS -->
       <!-- load angular via CDN -->
       <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.9/angular.min.js"></script>
           <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.9/angular-route.js"></script>
+      <script src="vendor/ng-map.min.js"></script>
+      <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+      <script src="vendor/material.min.js"></script>
+      <script src="vendor/ripples.min.js"></script>
       <script src="app.js"></script>
+      <script>
+      $(function() {
+        $.material.init();
+      });
+    </script>
     </head>
 
     <!-- define angular controller -->
     <body ng-controller="mainController">
 
-     <!-- MAIN CONTENT AND INJECTED VIEWS -->
-      <div id="main">
+      <div class="container">
+        <div class="header clearfix">
+          <nav>
+            <ul class="nav nav-pills pull-right">
+              <li role="presentation" class="active"><a href="#">Home</a></li>
+              <li role="presentation"><a href="#">About</a></li>
+              <li role="presentation"><a href="#">Contact</a></li>
+            </ul>
+          </nav>
+          <h3 class="text-muted">Aqualize</h3>
+        </div>
 
-          <!-- angular templating -->
-          <!-- this is where content will be injected -->
-          <div ng-view></div>
+        <div ng-view></div>
 
-      </div>
+        <footer class="footer">
+          <p>&copy; 2016 Company, Inc.</p>
+        </footer>
 
+      </div> <!-- /container -->
     </body>
 </html>
