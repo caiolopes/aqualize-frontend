@@ -78,7 +78,7 @@ h6 {
 a,
 a:hover,
 a:focus {
-  color: #009688;
+  color: #35aeef;
 }
 a .material-icons,
 a:hover .material-icons,
@@ -146,7 +146,7 @@ body .container .well-primary,
 body .container-fluid .well-primary,
 body .container .jumbotron-primary,
 body .container-fluid .jumbotron-primary {
-  background-color: #009688;
+  background-color: #35aeef;
 }
 body .container .well-success,
 body .container-fluid .well-success,
@@ -213,7 +213,7 @@ body .container-fluid .jumbotron-danger {
 }
 .btn:not(.btn-raised).btn-primary,
 .input-group-btn .btn:not(.btn-raised).btn-primary {
-  color: #009688;
+  color: #286090;
 }
 .btn:not(.btn-raised).btn-success,
 .input-group-btn .btn:not(.btn-raised).btn-success {
@@ -264,7 +264,7 @@ body .container-fluid .jumbotron-danger {
 .input-group-btn .btn.btn-fab.btn-inverse,
 .btn-group-raised .btn.btn-inverse,
 .btn-group-raised .input-group-btn .btn.btn-inverse {
-  background-color: #3f51b5;
+  background-color: #35aeef;
   color: #ffffff;
 }
 .btn.btn-raised.btn-primary,
@@ -273,7 +273,7 @@ body .container-fluid .jumbotron-danger {
 .input-group-btn .btn.btn-fab.btn-primary,
 .btn-group-raised .btn.btn-primary,
 .btn-group-raised .input-group-btn .btn.btn-primary {
-  background-color: #009688;
+  background-color: #35aeef;
   color: rgba(255,255,255, 0.84);
 }
 .btn.btn-raised.btn-success,
@@ -405,7 +405,7 @@ body .container-fluid .jumbotron-danger {
 .input-group-btn .btn.btn-raised:not(.btn-link):active.btn-primary,
 .btn-group-raised .btn:not(.btn-link):active.btn-primary,
 .btn-group-raised .input-group-btn .btn:not(.btn-link):active.btn-primary {
-  background-color: #00aa9a;
+  background-color: #196790;
 }
 .btn.btn-raised:not(.btn-link):hover.btn-success,
 .input-group-btn .btn.btn-raised:not(.btn-link):hover.btn-success,
@@ -780,7 +780,7 @@ fieldset[disabled][disabled] .btn-group-vertical.btn-group-raised:focus:not(:act
 }
 .btn-group.open > .dropdown-toggle.btn.btn-primary,
 .btn-group-vertical.open > .dropdown-toggle.btn.btn-primary {
-  background-color: #009688;
+  background-color: #196790;
 }
 .btn-group.open > .dropdown-toggle.btn.btn-success,
 .btn-group-vertical.open > .dropdown-toggle.btn.btn-success {

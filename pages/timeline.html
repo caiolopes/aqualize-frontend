@@ -4,6 +4,14 @@ ng-map {
   height:400px;
 }
 </style>
+<style>
+	.panel-title{
+		color: white;
+	}
+	.btn-primary{
+		color: #196790;
+	}
+</style>
 <div class="well page">
 	<div class="row">
 		<div map-lazy-load="https://maps.google.com/maps/api/js"
@@ -17,13 +25,14 @@ ng-map {
 		<div class="col-xs-12">
 			<div class="panel panel-info" ng-repeat="n in array track by $index">
 			  <div class="panel-heading">
-			    <h3 class="panel-title">{{ n.type }}</h3>
+			    <b><h3 class="panel-title">{{ n.type }}</h3><b>
 			  </div>
 			  <div class="panel-body">
-			  	<p>Enviado por: <i>{{ n.author }}</i> </p>
+			  	<p><b>Autor: </b> <i>{{ n.author }}</i> </p>
+			  	<h5><b>Relato: </b>{{ n.report }}<h5>
+			  	<p><b>Sugestão: </b>{{ n.sugestao }}</p>
 				<p align="center"><img src="images/{{ n.img }}" class="img-responsive" style="height:300px;"></p>
-			    {{ n.report }}
-				<p><b>Sugestão:</b>{{ n.sugestao }}</p>
+
 				<h4>{{ n.likes }} Curtidas</h4>
 				<form ng-submit="incLikes(n)">
 					<fieldset class="form-group">
