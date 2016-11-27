@@ -1,210 +1,21 @@
 // script.js
-
-/*
-var geocodeAddress;
-
-window.initMap = function() {
-  console.log("AQUI");
-  var current, drag, geocoder, lat, latitude, lng, longitude, map, marker;
-  latitude = $('#latitude');
-  longitude = $('#longitude');
-  current = $('#current');
-  marker = null;
-  drag = false;
-  map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 12,
-    center: {
-      lat: -34.397,
-      lng: 150.644
-    }
-  });
-  lat = -22.005;
-  lng = -47.898;
-  map.setZoom(15);
-  if (latitude.length && longitude.length) {
-    drag = true;
-    if (latitude.val().length > 0 && longitude.val().length > 0) {
-      lat = latitude.val();
-      lng = longitude.val();
-    }
-  }
-  marker = new google.maps.Marker({
-    position: new google.maps.LatLng(lat, lng),
-    draggable: drag
-  });
-  map.setCenter(marker.position);
-  marker.setMap(map);
-  if (latitude.length && longitude.length) {
-    google.maps.event.addListener(marker, 'dragend', function(evt) {
-      current.html('<p>O lugar foi posicionado na latitude: ' + evt.latLng.lat().toFixed(3) + ' e longitude: ' + evt.latLng.lng().toFixed(3) + '</p>');
-      latitude.val(marker.getPosition().lat());
-      longitude.val(marker.getPosition().lng());
-    });
-    google.maps.event.addListener(marker, 'dragstart', function(evt) {
-      current.html('<p>Posicionando o lugar...</p>');
-    });
-    geocoder = new google.maps.Geocoder;
-    $('#search').click(function() {
-      geocodeAddress(geocoder, map, marker);
-    });
-  }
-};
-
-geocodeAddress = function(geocoder, resultsMap, marker) {
-  var address, current, latitude, longitude;
-  latitude = $('#latitude');
-  longitude = $('#longitude');
-  current = $('#current');
-  address = document.getElementById('address').value;
-  geocoder.geocode({
-    'address': address
-  }, function(results, status) {
-    if (status === google.maps.GeocoderStatus.OK) {
-      resultsMap.setCenter(results[0].geometry.location);
-      resultsMap.setZoom(15);
-      marker.setPosition(results[0].geometry.location);
-      resultsMap.setCenter(marker.position);
-      current.html('<p>O lugar foi posicionado na latitude: ' + marker.getPosition().lat().toFixed(3) + ' e longitude: ' + marker.getPosition().lng().toFixed(3) + '</p>');
-      latitude.val(marker.getPosition().lat());
-      longitude.val(marker.getPosition().lng());
-    } else {
-      alert('Geocode was not successful for the following reason: ' + status);
-    }
-  });
-};
-
-$(document).ready(function() {
-  var getCategories, getTypes, getUrlVars, pathname;
-  getCategories = function(edit) {
-    var category, placeCategory, vars;
-    if (edit == null) {
-      edit = false;
-    }
-    placeCategory = edit ? $('.place-category').first() : $('.place-category').last();
-    category = void 0;
-    vars = getUrlVars();
-    if (vars.category !== void 0) {
-      category = vars.category;
-    } else if (placeCategory.length) {
-      category = placeCategory.val();
-    }
-    $.getJSON('/categories', function(data) {
-      var html;
-      html = '';
-      $.each(data, function(index, value) {
-        if (category === value.category) {
-          html += '<option value="' + value.category + '" selected>' + value.category + '</option>';
-        } else {
-          html += '<option value="' + value.category + '">' + value.category + '</option>';
-        }
-      });
-      category = edit ? $('.category').first() : $('.category').last();
-      category.html(html);
-      category.on('change', function() {
-        getTypes(category.val(), edit);
-      });
-      getTypes(category.val(), edit);
-    });
-  };
-  getTypes = function(category, edit) {
-    var placeType, type, vars;
-    if (edit == null) {
-      edit = false;
-    }
-    console.log(edit);
-    placeType = edit ? $('.place-type').first() : $('.place-type').last();
-    console.log(placeType.val());
-    type = void 0;
-    vars = getUrlVars();
-    if (vars.type !== void 0) {
-      type = vars.type;
-    } else if (placeType.length) {
-      type = placeType.val();
-    }
-    $.getJSON('/types?category=' + category, function(data) {
-      var html;
-      html = '';
-      $.each(data, function(index, value) {
-        if (value.id === type || value.type === type) {
-          html += '<option value="' + value.id + '" selected>' + value.type + '</option>';
-        } else {
-          html += '<option value="' + value.id + '">' + value.type + '</option>';
-        }
-      });
-      if (edit) {
-        $('.type').first().html(html);
-      } else {
-        $('.type').last().html(html);
-      }
-    });
-  };
-  getUrlVars = function() {
-    var hash, hashes, i, vars;
-    vars = [];
-    hash = void 0;
-    hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
-    i = 0;
-    while (i < hashes.length) {
-      hash = hashes[i].split('=');
-      vars.push(hash[0]);
-      vars[hash[0]] = hash[1];
-      i++;
-    }
-    return vars;
-  };
-  pathname = window.location.pathname;
-  if (pathname === '/place' || pathname === '/places' || pathname === '/places/search') {
-    getCategories();
-  } else if (pathname.indexOf('/place/edit/') > -1) {
-    getCategories(true);
-  }
-  if ($('#message').length) {
-    setTimeout(function() {
-      $('#message').fadeOut('slow');
-    }, 5000);
-  }
-  $('#confirm-delete').on('show.bs.modal', function(e) {
-    return $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
-  });
-  
-  $('.repeater').repeater({
-    show: function() {
-      $(this).slideDown();
-      getCategories();
-      $(".category").eq(-2).prop('disabled', true);
-    },
-    hide: function(deleteElement) {
-      $(".category").eq(-2).prop('disabled', false);
-      $(this).slideUp(deleteElement);
-    },
-    isFirstItemUndeletable: true
-  });
-});
-*/
-    // create the module and name it aqualize
-        // also include ngRoute for all our routing needs
     var aqualize = angular.module('aqualize', ['ngRoute', 'ngMap', 'ngFileUpload']);
 
     // configure our routes
     aqualize.config(function($routeProvider) {
         $routeProvider
-
-            // route for the home page
             .when('/', {
                 templateUrl : 'pages/login.html',
                 controller  : 'loginController' 
             })
-            .when('/home', {
-                templateUrl : 'pages/home.html',
-                controller  : 'mainController'
+            .when('/relatar', {
+                templateUrl : 'pages/relatar.html',
+                controller  : 'reportController'
             })
-            // route for the about page
-            .when('/about', {
-                templateUrl : 'pages/about.html',
-                controller  : 'aboutController'
+            .when('/timeline', {
+                templateUrl : 'pages/timeline.html',
+                controller  : 'timelineController'
             })
-
-            // route for the contact page
             .when('/contact', {
                 templateUrl : 'pages/contact.html',
                 controller  : 'contactController'
@@ -212,11 +23,38 @@ $(document).ready(function() {
 
     });
 
-    // create the controller and inject Angular's $scope
-    aqualize.controller('mainController', function($rootScope,$scope, NgMap, Upload) {
-        $rootScope.showfootnav = true;
+    aqualize.service('markersArr', function() {
+      var markers = [];
 
-        var myMap, marker = false, lat = -23.5977319, lng = -46.6821862;
+        return {
+            get: function () {
+                return markers;
+            },
+            add: function(marker) {
+                markers.push(marker);
+            }
+        };
+    });
+
+
+    aqualize.service('infowindowArr', function() {
+      var info = [];
+
+        return {
+            get: function () {
+                return info;
+            },
+            add: function(marker) {
+                info.push(marker);
+            }
+        };
+    });
+
+    // create the controller and inject Angular's $scope
+    aqualize.controller('reportController', function($rootScope, $scope, NgMap, Upload, $location, markersArr) {
+        var myMap, marker, lat = -23.5977319, lng = -46.6821862;
+        $rootScope.nav = "report";
+        $rootScope.showfootnav = true;
         // create a message to display in our view
         $scope.message = 'Everyone come and see how good I look!';
         $scope.googleMapsUrl="https://maps.googleapis.com/maps/api/js?key=AIzaSyCEdyZcl5KZB3RkXr6JeI8mg1HjG5ZduEU";
@@ -240,21 +78,24 @@ $(document).ready(function() {
       var geocoder;
       NgMap.getMap().then(function(map) {
         myMap = map;
-        if (!marker) { 
-            marker = new google.maps.Marker({
-                position: new google.maps.LatLng(lat, lng),
-                draggable: true
-            });
-            map.setCenter(marker.position);
-            marker.setMap(myMap);
-            google.maps.event.addListener(marker, 'dragend', function(evt) {
-
-            });
-            google.maps.event.addListener(marker, 'dragstart', function(evt) {
-              
-            });
-            geocoder = new google.maps.Geocoder;
+        for (var i = 0; i < markersArr.get().length; i++) {
+          markersArr.get()[i].setMap(null);
         }
+        marker = new google.maps.Marker({
+            position: new google.maps.LatLng(lat, lng),
+            draggable: true,
+            icon: 'https://s12.postimg.org/ouov6akgt/water_drop.png',
+        });
+        markersArr.add(marker);
+        map.setCenter(marker.position);
+        marker.setMap(myMap);
+        google.maps.event.addListener(marker, 'dragend', function(evt) {
+
+        });
+        google.maps.event.addListener(marker, 'dragstart', function(evt) {
+          
+        });
+        geocoder = new google.maps.Geocoder;
       });
 
         // upload on file select or drop
@@ -273,19 +114,51 @@ $(document).ready(function() {
         };
     });
 
-    aqualize.controller('aboutController', function($scope) {
-        $scope.message = 'Look! I am an about page.';
-        $scope.submitForm = function() {
-            alert("Name: " + $scope.name);
-        };
-    });
+    aqualize.controller('timelineController', function($rootScope, $scope, $location, NgMap, markersArr) {
+        $rootScope.nav = "timeline";
+        $rootScope.showfootnav = true;
+        $scope.array = [{
+          "id": 1,
+          "type": "Vazamento",
+          "description": "Há dias percebi um fluxo de água anormal perto da minha casa, segui o caminho que a água percorreria e identifiquei alguns canos rompidos por onde sai muita água limpa.",
+          "lat": -22.814023987885484,
+          "lng": -43.27381610870361, 
+          "img": "vazamento.jpg",
+          "help": "Entrei em contato com a SABESP e os mesmos ficaram responsáveis pelo reparo do cano, mas até agora nada. Como é uma água limpa, consegui captar um pouco com alguns baldes, o que vai me ajudar na lavagem do quintal e banheiros."
+        }, {
+          "id": 2,
+          "type": "Poluição",
+           "description": "Meu vizinho joga restos de óleo de cozinhar no riacho que tem perto de casa. Já o avisei dos problemas que isto pode causar mas ele continua jogando.",
+          "lat": -23.4888228,
+          "lng": -46.52699960000001, 
+          "img": "poluicao.jpg",
+          "help": "Enviar coleta seletiva para materiais orgânicos que podem prejudicar o meio ambiente quando descartados incorretamente."
+        }];
 
-    aqualize.controller('contactController', function($scope) {
-        $scope.message = 'Contact us! JK. This is just a demo.';
+        NgMap.getMap().then(function(map) {
+          for (var i = 0; i < markersArr.get().length; i++) {
+            markersArr.get()[i].setMap(null);
+            markersArr.get().splice(i, 1);
+          }
+          for (index in $scope.array) {
+            var myinfowindow = new google.maps.InfoWindow({
+              content: "<img src='images/"+$scope.array[index].img+"' width='200' height='200'>"
+            });
+            var marker = new google.maps.Marker({
+                position: new google.maps.LatLng($scope.array[index].lat, $scope.array[index].lng),
+                draggable: false,
+                icon: 'https://s12.postimg.org/ouov6akgt/water_drop.png',
+                infowindow: myinfowindow
+            });
+            markersArr.add(marker);
+            marker.setMap(map);
+            google.maps.event.addListener(marker, 'click', function() {
+              this.infowindow.open(map, this);
+            });
+          }
+        });
     });
 
     aqualize.controller('loginController', function($rootScope) {
         $rootScope.showfootnav = false;
     });
-
-    

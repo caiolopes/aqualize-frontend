@@ -35,15 +35,14 @@
     </head>
 
     <!-- define angular controller -->
-    <body ng-controller="mainController">
+    <body ng-controller="loginController">
 
       <div class="container">
         <div class="header clearfix" ng-show="showfootnav">
           <nav>
             <ul class="nav nav-pills pull-right">
-              <li role="presentation" class="active"><a href="#">Home</a></li>
-              <li role="presentation"><a href="#">Relatar</a></li>
-              <li role="presentation"><a href="#">Contato</a></li>
+              <li role="presentation" class="{{nav == 'timeline' ? 'active' : ''}}"><a href="#/timeline">Timeline</a></li>
+              <li role="presentation" class="{{nav == 'relatar' ? 'active' : ''}}"><a href="#/relatar">Relatar</a></li>
             </ul>
           </nav>
           <h3 class="text-muted">Aqualize</h3>
