@@ -191,7 +191,8 @@ $(document).ready(function() {
 
             // route for the home page
             .when('/', {
-                templateUrl : 'pages/login.html'
+                templateUrl : 'pages/login.html',
+                controller  : 'loginController' 
             })
             .when('/home', {
                 templateUrl : 'pages/home.html',
@@ -208,10 +209,13 @@ $(document).ready(function() {
                 templateUrl : 'pages/contact.html',
                 controller  : 'contactController'
             });
+
     });
 
     // create the controller and inject Angular's $scope
-    aqualize.controller('mainController', function($scope, NgMap, Upload) {
+    aqualize.controller('mainController', function($rootScope,$scope, NgMap, Upload) {
+        $rootScope.showfootnav = true;
+
         var myMap, marker = false, lat = -23.5977319, lng = -46.6821862;
         // create a message to display in our view
         $scope.message = 'Everyone come and see how good I look!';
@@ -279,3 +283,9 @@ $(document).ready(function() {
     aqualize.controller('contactController', function($scope) {
         $scope.message = 'Contact us! JK. This is just a demo.';
     });
+
+    aqualize.controller('loginController', function($rootScope) {
+        $rootScope.showfootnav = false;
+    });
+
+    

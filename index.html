@@ -38,8 +38,8 @@
     <body ng-controller="mainController">
 
       <div class="container">
-        <div class="header clearfix">
-          <nav ng-show="!hello">
+        <div class="header clearfix" ng-show="showfootnav">
+          <nav>
             <ul class="nav nav-pills pull-right">
               <li role="presentation" class="active"><a href="#">Home</a></li>
               <li role="presentation"><a href="#">Relatar</a></li>
@@ -51,7 +51,7 @@
 
         <div ng-view></div>
 
-        <footer class="footer">
+        <footer class="footer" ng-show="showfootnav">
           <p>&copy; 2016 Company, Inc.</p>
         </footer>
 
