@@ -32,23 +32,18 @@ ng-map {
 			  	<h5><b>Relato: </b>{{ n.report }}<h5>
 			  	<p><b>Sugestão: </b>{{ n.sugestao }}</p>
 				<p align="center"><img src="images/{{ n.img }}" class="img-responsive" style="height:300px;"></p>
-
-				<h4>{{ n.likes }} Curtidas</h4>
-				<form ng-submit="incLikes(n)">
-					<fieldset class="form-group">
-						<input type="submit" class="btn btn-primary" value="{{ n.liked ? 'Descurtir' : 'Curtir' }}"/>
-					</fieldset>
-				</form>
+				<button ng-click="incLikes(n)" type="button" class="btn btn-default btn-lg">
+				  {{ n.likes }} <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+				</button>
 			    <h3>Comentários</h3>
 			    <hr>
 			    <div ng-repeat="c in n.comments">
 			    	<p><b>{{ c.author }}</b>: </p>
-					{{ c.comment }}
-					<h5>{{ c.likes }} Curtidas</h5>
-					<form ng-submit="incLikes(c)">
-						<fieldset class="form-group">
-							<input type="submit" class="btn btn-primary" value="{{ c.liked ? 'Descurtir' : 'Curtir'}} "/>
-						</fieldset>
+					<p>{{ c.comment }}</p>
+
+					<button ng-click="incLikes(c)" type="button" class="btn btn-default btn-lg">
+						{{ c.likes }} <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+					</button>
 					</form>
 			    </div>
 				<form ng-submit="addComment(n)" name="commentForm">
